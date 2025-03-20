@@ -4,58 +4,85 @@ body {
   background-color: #1e1e1e;
   color: #ffffff;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column; /* Stack elements vertically */
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
   height: 100vh; /* Full viewport height */
   margin: 0; /* Remove default margin */
+  position: relative; /* Make body a positioning context for the button */
 }
 
-.game-container {
-  text-align: center; /* Center text inside the container */
-  background-color: #2c2c2c;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  width: 300px; /* Adjust width as needed */
-  position: relative; /* Ensure child elements can be positioned absolutely */
+#main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center horizontally */
+  gap: 100px; /* Space between the title and game container */
+  width: 100%; /* Ensure the container takes full width */
+  height: 100%; /* Ensure the container takes full height */
 }
 
 h1 {
-  font-size: 6.5rem; /* Larger font size for the title */
-  margin: 0; /* Remove default margin */
+  font-size: 7rem; /* Larger font size for the title */
+  margin: 20px 0 0 0; /* Space above the title */
   background: linear-gradient(90deg, #0080ff, #00ff80); /* Gradient background */
   background-clip: text; /* Standard property */
   -webkit-background-clip: text; /* Vendor-prefixed property for WebKit browsers */
   -webkit-text-fill-color: transparent; /* Make the text transparent to show the gradient */
-  position: absolute; /* Position the title absolutely */
-  top: -100%; /* Move the title higher up (adjust this value as needed) */
-  left: 50%; /* Center horizontally */
-  transform: translate(-50%, -50%); /* Center the title precisely */
-  width: 200%; /* Ensure the title takes full width for centering */
   text-align: center; /* Center the text inside the h1 */
+  white-space: nowrap; /* Prevent text from wrapping to the next line */
+}
+
+.game-container {
+  text-align: center; /* Center text inside the container */
+  background-color: #2c2c2c; /* Light gray background */
+  padding: 40px; /* Increase padding to make the box bigger */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Shadow effect */
+  width: 500px; /* Increase width */
+  min-height: 200px; /* Set a minimum height */
+  display: flex;
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+}
+
+#result {
+  font-size: 4.5rem; /* Larger font size for the rolled aura */
+  font-weight: bold; /* Make the text bold */
+  color: white; /* Default color for the rolled aura */
+  text-align: center; /* Center the text */
+}
+
+#aura-name {
+  display: inline-block; /* Ensure the text takes up space */
+}
+
+.bottom-box {
+  position: absolute; /* Position the box absolutely */
+  bottom: 0; /* Place the box at the bottom of the screen */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Center the box precisely */
+  width: 100%; /* Make the box wider (adjust as needed) */
+  height: 130px; /* Set the height of the box */
+  background-color: #2c2c2c; /* Same gray as the game container */
+  border-radius: 10px 10px 0 0; /* Rounded corners at the top */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Shadow effect */
+  z-index: -1; /* Place the box behind the button */
 }
 
 button {
   padding: 10px 20px;
-  font-size: 16px;
+  font-size: 40px; /* Larger font size for the button */
   background-color: #4CAF50;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 20px; /* Space above the button */
+  position: absolute; /* Position the button absolutely */
+  bottom: 35px; /* Place the button 50px from the bottom */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Center the button precisely */
 }
 
 button:hover {
   background-color: #45a049;
-}
-
-#result {
-  margin-top: 20px;
-  font-size: 20px;
-  color: #ffffff; /* Yellow color for the result */
-}
-
-#aura-name {
-  font-weight: bold; /* Make the aura name stand out */
 }
