@@ -1,5 +1,9 @@
 const rollButton = document.getElementById("roll-button");
 const auraNameElement = document.getElementById("aura-name");
+const clickSound = document.getElementById("click-sound"); // Get the audio element
+
+// Debugging: Check if the audio element is found
+console.log("Audio element:", clickSound);
 
 // Define a list of auras with their rarity (using integer weights)
 const auras = [
@@ -54,17 +58,55 @@ function getAuraColor(auraName) {
   }
 }
 
-rollButton.addEventListener("click", () => {
-  // Generate a random number between 0 and totalWeight
-  const randomNumber = Math.random() * totalWeight;
+// Function to simulate the rapid switching effect
+function simulateRoll() {
+  let interval = 75; // Initial interval between switches (in milliseconds)
+  const duration = 2000; // Total duration of the effect (in milliseconds)
+  const startTime = Date.now();
 
-  // Determine which aura is rolled based on weighted probability
+  // Function to switch aura names and adjust the interval
+  function switchAura() {
+    const randomAura = auras[Math.floor(Math.random() * auras.length)];
+    auraNameElement.textContent = randomAura.name;
+    auraNameElement.style.color = getAuraColor(randomAura.name);
+
+    // Play the click sound
+    if (clickSound) {
+      console.log("Playing sound..."); // Debugging
+      clickSound.currentTime = 0; // Reset the sound to the beginning
+      clickSound.play().then(() => {
+        console.log("Sound played successfully!"); // Debugging
+      }).catch((error) => {
+        console.error("Error playing sound:", error); // Debugging
+      });
+    } else {
+      console.error("Audio element not found!"); // Debugging
+    }
+
+    // Gradually slow down the switching
+    const elapsedTime = Date.now() - startTime;
+    if (elapsedTime >= duration) {
+      determineFinalAura(); // Determine and display the final aura
+    } else {
+      interval += 5; // Gradually increase the interval to slow down the switching
+      setTimeout(switchAura, interval); // Recursively call switchAura with the new interval
+    }
+  }
+
+  // Start the rapid switching effect
+  switchAura();
+}
+
+// Function to determine the final aura
+function determineFinalAura() {
+  const randomNumber = Math.random() * totalWeight;
   let cumulativeWeight = 0;
+
   for (const aura of auras) {
     cumulativeWeight += aura.weight;
     if (randomNumber <= cumulativeWeight) {
-      auraNameElement.textContent = aura.name; // Set the aura name
-      auraNameElement.style.color = getAuraColor(aura.name); // Set the aura name color
+      auraNameElement.textContent = aura.name; // Set the final aura name
+      auraNameElement.style.color = getAuraColor(aura.name); // Set the final aura color
 
       // Handle gradient for "Jackpot"
       if (aura.name === "Jackpot") {
@@ -82,6 +124,11 @@ rollButton.addEventListener("click", () => {
       break;
     }
   }
+}
+
+// Add event listener to the roll button
+rollButton.addEventListener("click", () => {
+  simulateRoll(); // Start the rapid switching effect
 });
 
 // Debugging: Display the number of times each aura has been rolled
