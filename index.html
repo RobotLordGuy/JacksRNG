@@ -8,15 +8,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="game-container">
+  <div id="main-container">
     <h1>Jacks RNG</h1> <!-- Title -->
-    <p>Click the button to roll for an aura!</p>
-    <button id="roll-button">Roll</button>
-    <div id="result">
-        <span id="result-text">You rolled: </span>
+    <div class="game-container">
+      <div id="result">
         <span id="aura-name"></span>
+      </div>
     </div>
+    <div class="bottom-box"></div> <!-- Gray box at the bottom -->
+    <button id="roll-button">Roll</button>
   </div>
+  <audio id="click-sound" src="sounds\Jacks-RNG-pop-effect.wav" preload="auto"></audio>
   <script src="script.js"></script>
 </body>
 </html>
