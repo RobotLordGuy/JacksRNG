@@ -1,88 +1,217 @@
-/* styles.css */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Press Start 2P', Arial, sans-serif;
   background-color: #1e1e1e;
   color: #ffffff;
   display: flex;
-  flex-direction: column; /* Stack elements vertically */
-  justify-content: center; /* Center content vertically */
-  align-items: center; /* Center content horizontally */
-  height: 100vh; /* Full viewport height */
-  margin: 0; /* Remove default margin */
-  position: relative; /* Make body a positioning context for the button */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  position: relative;
+  overflow: hidden;
 }
 
 #main-container {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center horizontally */
-  gap: 100px; /* Space between the title and game container */
-  width: 100%; /* Ensure the container takes full width */
-  height: 100%; /* Ensure the container takes full height */
+  align-items: center;
+  gap: 60px;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 h1 {
-  font-size: 7rem; /* Larger font size for the title */
-  margin: 20px 0 0 0; /* Space above the title */
-  background: linear-gradient(90deg, #0080ff, #00ff80); /* Gradient background */
-  background-clip: text; /* Standard property */
-  -webkit-background-clip: text; /* Vendor-prefixed property for WebKit browsers */
-  -webkit-text-fill-color: transparent; /* Make the text transparent to show the gradient */
-  text-align: center; /* Center the text inside the h1 */
-  white-space: nowrap; /* Prevent text from wrapping to the next line */
+  font-size: clamp(3rem, 10vw, 7rem);
+  margin: 20px 0 0 0;
+  background: linear-gradient(90deg, #0080ff, #00ff80);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  white-space: nowrap;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .game-container {
-  text-align: center; /* Center text inside the container */
-  background-color: #2c2c2c; /* Light gray background */
-  padding: 40px; /* Increase padding to make the box bigger */
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Shadow effect */
-  width: 500px; /* Increase width */
-  min-height: 200px; /* Set a minimum height */
+  text-align: center;
+  background-color: #2c2c2c;
+  padding: 30px 40px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+  width: min(700px, 90vw);
+  min-height: 220px;
   display: flex;
-  justify-content: center; /* Center content vertically */
-  align-items: center; /* Center content horizontally */
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #3a3a3a;
+  position: relative;
 }
 
 #result {
-  font-size: 4.5rem; /* Larger font size for the rolled aura */
-  font-weight: bold; /* Make the text bold */
-  color: white; /* Default color for the rolled aura */
-  text-align: center; /* Center the text */
+  position: relative;
+  font-size: 5rem;
+  font-weight: bold;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
 }
 
 #aura-name {
-  display: inline-block; /* Ensure the text takes up space */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) scale(1);
+  white-space: nowrap;
+  transform-origin: center;
+  transition: transform 0.2s ease-out;
+  line-height: 1;
+  text-align: center;
+  padding: 0 10px;
+  margin: 0 auto;
+  display: inline-block;
+}
+
+/* Special Crystallized styling */
+#aura-name.crystallized {
+  font-size: 4rem;
+  letter-spacing: -0.5px;
+  transform: translateX(-50%) scale(0.85);
+}
+
+/* JACKPOT EFFECT - PROPERLY PREFIXED */
+#aura-name.jackpot-effect {
+  background: linear-gradient(90deg, 
+    red 0%, orange 20%, yellow 40%, 
+    green 60%, blue 80%, violet 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: jackpot-glow 0.5s ease-in-out infinite alternate;
+  padding: 0 15px;
+  display: inline-block;
+}
+
+@keyframes jackpot-glow {
+  0% {
+    text-shadow: 
+      0 0 5px rgba(255, 0, 0, 0.8),
+      0 0 10px rgba(255, 50, 0, 0.6),
+      0 0 15px rgba(255, 100, 0, 0.4);
+  }
+  100% {
+    text-shadow: 
+      0 0 15px rgba(255, 0, 0, 1),
+      0 0 25px rgba(255, 100, 0, 0.8),
+      0 0 35px rgba(255, 200, 0, 0.6),
+      0 0 45px rgba(255, 255, 0, 0.4);
+  }
+}
+
+.aura-text {
+  text-shadow: 0 0 8px currentColor;
 }
 
 .bottom-box {
-  position: absolute; /* Position the box absolutely */
-  bottom: 0; /* Place the box at the bottom of the screen */
-  left: 50%; /* Center horizontally */
-  transform: translateX(-50%); /* Center the box precisely */
-  width: 100%; /* Make the box wider (adjust as needed) */
-  height: 130px; /* Set the height of the box */
-  background-color: #2c2c2c; /* Same gray as the game container */
-  border-radius: 10px 10px 0 0; /* Rounded corners at the top */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Shadow effect */
-  z-index: -1; /* Place the box behind the button */
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 130px;
+  background-color: #2c2c2c;
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+  z-index: -1;
 }
 
 button {
-  padding: 10px 20px;
-  font-size: 40px; /* Larger font size for the button */
+  padding: 15px 40px;
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
   background-color: #4CAF50;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
-  position: absolute; /* Position the button absolutely */
-  bottom: 35px; /* Place the button 50px from the bottom */
-  left: 50%; /* Center horizontally */
-  transform: translateX(-50%); /* Center the button precisely */
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 0 #3a8f3d, 
+              0 6px 8px rgba(0, 0, 0, 0.3);
 }
 
 button:hover {
   background-color: #45a049;
+  transform: translateX(-50%) translateY(-2px);
+  box-shadow: 0 6px 0 #3a8f3d, 
+              0 8px 12px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+  transform: translateX(-50%) translateY(2px);
+  box-shadow: 0 2px 0 #3a8f3d;
+}
+
+button:disabled {
+  background-color: #3a3a3a;
+  color: #6b6b6b;
+  transform: translateX(-50%);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+@media (max-height: 800px) {
+  #main-container {
+    gap: 40px;
+  }
+  
+  .game-container {
+    min-height: 200px;
+    padding: 25px 35px;
+  }
+  
+  #result {
+    font-size: 4.5rem;
+  }
+  
+  #aura-name.crystallized {
+    font-size: 3.5rem;
+  }
+  
+  .bottom-box {
+    height: 110px;
+  }
+  
+  button {
+    bottom: 30px;
+  }
+}
+
+@media (max-width: 500px) {
+  .game-container {
+    width: min(500px, 90vw);
+    min-height: 180px;
+    padding: 20px 25px;
+  }
+  
+  #result {
+    font-size: 4rem !important;
+  }
+  
+  #aura-name.crystallized {
+    font-size: 3.2rem !important;
+    letter-spacing: -1px;
+    transform: translateX(-50%) scale(0.8) !important;
+  }
+  
+  /* Mobile Jackpot adjustment */
+  #aura-name.jackpot-effect {
+    padding: 0 10px;
+    animation: jackpot-glow 0.4s ease-in-out infinite alternate;
+  }
 }
